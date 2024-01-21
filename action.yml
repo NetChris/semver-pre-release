@@ -54,7 +54,3 @@ runs:
         echo This is NOT a pre-release version (${{ steps.parse.outputs.semver_version }}).  Use a GitHub release or tag as SemVer with a pre-release version.
         exit 1
       shell: bash
-    - name: Output SemVer Version
-      id: output_semver_version
-      run: echo ${{ steps.parse.outputs.semver_version }}
-      shell: bash
