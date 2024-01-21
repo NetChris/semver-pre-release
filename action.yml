@@ -5,13 +5,13 @@ description: ''
 outputs:
   semver_version:
     description: 'The fully matched version'
-    value: ${{ steps.semver_derive.outputs.semver_version }}
+    value: ${{ steps.parse.outputs.semver_version }}
 
 runs:
   using: "composite"
   steps:
     - name: Derive SemVer
-      id: semver_derive
+      id: parse
       uses: NetChris/parse-semver@11-output-nuget-microsoft-versions
     - name: SemVer Gate
       id: semver_gate
