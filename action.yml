@@ -6,6 +6,33 @@ outputs:
   semver_version:
     description: 'The fully matched version'
     value: ${{ steps.parse.outputs.semver_version }}
+  major_version:
+    description: 'The major version'
+    value: ${{ steps.parse.outputs.major_version }}
+  minor_version:
+    description: 'The minor version'
+    value: ${{ steps.parse.outputs.minor_version }}
+  patch_version:
+    description: 'The patch version'
+    value: ${{ steps.parse.outputs.patch_version }}
+  pre_release_version:
+    description: 'The pre-release version'
+    value: ${{ steps.parse.outputs.pre_release_version }}
+  build_metadata:
+    description: 'The build metadata'
+    value: ${{ steps.parse.outputs.build_metadata }}
+  major_minor_version:
+    description: 'Returns any matching MajorVersion.MinorVersion pattern whether the input is valid SemVer or not.  Useful for development releases whee patch and prerelease values will be provided programmatically.'
+    value: ${{ steps.parse.outputs.major_minor_version }}
+  fallback_version:
+    description: 'A best-effort at returning a SemVer-compatible version'
+    value: ${{ steps.parse.outputs.fallback_version }}
+  dotnet_assembly_version:
+    description: 'A version compatible with versioning .NET assemblies'
+    value: ${{ steps.parse.outputs.dotnet_assembly_version }}
+  nuget_version:
+    description: 'A version compatible with versioning NuGet packages'
+    value: ${{ steps.parse.outputs.nuget_version }}
 
 runs:
   using: "composite"
@@ -26,4 +53,8 @@ runs:
       run: |
         echo This is NOT a pre-release version (${{ steps.parse.outputs.semver_version }}).  Use a GitHub release or tag as SemVer with a pre-release version.
         exit 1
+      shell: bash
+    - name: Output SemVer Version
+      id: output_semver_version
+      run: echo ${{ steps.parse.outputs.semver_version }}
       shell: bash
