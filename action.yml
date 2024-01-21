@@ -1,0 +1,34 @@
+# action.yml
+name: 'Enforce SemVer 2 for pre-release'
+description: ''
+
+outputs:
+  semver_version:
+    description: 'The fully matched version'
+    value: ${{ steps.semver_derive.outputs.semver_version }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Derive SemVer
+      id: semver_derive
+      uses: NetChris/parse-semver@11-output-nuget-microsoft-versions
+    - name: SemVer Gate
+      id: semver_gate
+      if: ${{ steps.parse.outputs.semver_version == '' }}
+      run: |
+        echo Pre-Releases require a SemVer tag
+        exit 1
+      shell: bash
+    - name: Version Gate
+      id: version_gate
+      if: ${{ steps.parse.outputs.pre_release_version == '' }}
+      run: |
+        echo This is NOT a pre-release version.  Use a GitHub release or tag as SemVer with a pre-release version.
+        exit 1
+      shell: bash
+    - name: What version are we releasing?
+      id: echo_version
+      run: |
+        echo ${{ steps.parse.outputs.semver_version }}
+      shell: bash
