@@ -24,11 +24,6 @@ runs:
       id: version_gate
       if: ${{ steps.parse.outputs.pre_release_version == '' }}
       run: |
-        echo This is NOT a pre-release version.  Use a GitHub release or tag as SemVer with a pre-release version.
+        echo This is NOT a pre-release version (${{ steps.parse.outputs.semver_version == }}).  Use a GitHub release or tag as SemVer with a pre-release version.
         exit 1
-      shell: bash
-    - name: What version are we releasing?
-      id: echo_version
-      run: |
-        echo ${{ steps.parse.outputs.semver_version }}
       shell: bash
