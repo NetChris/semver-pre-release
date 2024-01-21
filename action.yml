@@ -44,7 +44,7 @@ runs:
       id: semver_gate
       if: ${{ steps.parse.outputs.semver_version == '' }}
       run: |
-        echo Pre-Releases require a SemVer tag
+        echo ERROR: Pre-Releases require a SemVer tag 1>&2
         exit 1
       shell: bash
     - name: Version Gate
