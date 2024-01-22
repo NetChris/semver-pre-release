@@ -39,7 +39,7 @@ runs:
   steps:
     - name: Derive SemVer
       id: parse
-      uses: NetChris/parse-semver@11-output-nuget-microsoft-versions
+      uses: NetChris/parse-semver@fdf7c91e3c241d139205239b3a48d3e0a530f64c
     - name: SemVer Gate
       id: semver_gate
       if: ${{ steps.parse.outputs.semver_version == '' }}
