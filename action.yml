@@ -44,7 +44,7 @@ runs:
       id: semver_gate
       if: ${{ steps.parse.outputs.semver_version == '' }}
       run: |
-        echo ERROR: Pre-Releases require a SemVer tag 1>&2
+        echo ERROR: ${{ steps.parse.outputs.value_to_parse }} does not contain a SemVer version 1>&2
         exit 1
       shell: bash
     - name: Version Gate
