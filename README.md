@@ -21,10 +21,12 @@ jobs:
     steps:
       - name: Enforce SemVer for pre-release
         id: enforce_semver
-        uses: NetChris/semver-pre-release@v0
+        uses: NetChris/semver-pre-release@SHA
       - name: Use the SemVer version
         run: echo Do something with semver_version: ${{ steps.enforce_semver.outputs.semver_version }}
 ```
+
+Use the latest (or most-appropriate) SHA to ensure consistent results.
 
 ## Notes
 
